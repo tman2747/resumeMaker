@@ -1,3 +1,22 @@
 .mainForm {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.contactInfo {
+  background-color: grey;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 600px;
+}
+
+.contactInfo > div {
+  display: flex;
+  flex-direction: column;
 }

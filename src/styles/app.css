@@ -1,7 +1,12 @@
+@font-face {
+  font-family: jetBrainsMono;
+  src: url(../assets/fonts/webfonts/JetBrainsMono-Regular.woff2);
+}
 * {
   padding: 0;
   margin: 0px;
   box-sizing: border-box;
+  font-family: jetBrainsMono, sans-serif;
 }
 
 body {

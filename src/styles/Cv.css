@@ -1,5 +1,4 @@
 * {
-  border: red solid 1px;
 }
 .CV {
   width: 50%;
@@ -12,4 +11,26 @@
   background-color: rgb(223, 223, 223);
   height: 900px;
   width: 80%;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 25px 0px 30px 0px;
+  border-bottom: 2px black solid;
+}
+
+/*for adding print functionality later. not to worried about it now but this is about how id do it*/
+@media print {
+  /* All your print styles go here */
+  .mainForm {
+    display: none;
+  }
+  .CV,
+  .CV,
+  .header {
+    display: flex;
+  }
 }

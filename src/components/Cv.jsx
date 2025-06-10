@@ -10,6 +10,21 @@ export function CV({ cvdata }) {
 }
 
 function CVCard({ data }) {
+  if (data.address == null || data.city == null) {
+    // im only doing this because i dont want the commas in if its blank. probably a better way of doing this without repeating code.
+    return (
+      <div className="CVCard">
+        <div className="header">
+          <h2>
+            {data.name} {data.lastName}
+          </h2>
+          <p>
+            {data.address} {data.city} {data.state} {data.zip}
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="CVCard">
       <div className="header">
