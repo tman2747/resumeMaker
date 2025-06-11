@@ -16,9 +16,12 @@ body {
   display: flex;
   /* same with this*/
   flex-direction: column;
+  background: #00809d;
 }
 
 .content {
   display: flex;
   justify-content: space-between;
+  padding: 25px;
+
 }

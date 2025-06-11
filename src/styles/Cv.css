@@ -8,9 +8,10 @@
   align-items: center;
 }
 .CVCard {
-  background-color: rgb(223, 223, 223);
+  background-color: #ffffff;
   height: 900px;
   width: 80%;
+  box-shadow: 0px 10px 50px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header {
