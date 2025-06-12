@@ -1,16 +1,64 @@
 import { useState } from "react";
 import "../styles/form.css";
 
-function formEducation(cvdata, setCVData) {
+// let education = {school: name, start: date, end: date}
+
+function formEducation({ cvdata, setCVData }) {
+  const { education, value } = [];
+  function removeEducation() {
+    setCVData((prev) => ({
+      ...prev,
+      education: null,
+    }));
+  }
+  function addEducation() {
+    setCVData((prev) => {
+      console.log(prev);
+      let date = "12/12/12";
+      return { ...prev, education: [{ school: name, start: date, end: date }] };
+    });
+  }
+
+  if (!cvdata.education) {
+    return (
+      <div>
+        add education <button onClick={addEducation}>+</button>
+      </div>
+    );
+  }
   return (
-    <div>
-      <h2>education</h2>
-    </div>
+    <>
+      <div>
+        add another <button onClick={addEducation}>+</button>
+      </div>
+      {cvdata.education.map((element, index) => console.log())}
+      <div className="schoolInfo">
+        <h2>education</h2> <button onClick={removeEducation}>remove</button>
+        <form action="get">
+          <h2>Contact Info</h2>
+          <div>
+            <label htmlFor="school">School</label>
+            <input
+              type="text"
+              id="school"
+              name="school"
+              placeholder="Harvard"
+            />
+
+            <label htmlFor="startDate">Start</label>
+            <input type="date" id="startDate" name="startDate" />
+
+            <label htmlFor="endDate">End</label>
+            <input type="date" id="endDate" name="endDate" />
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 
 export function Form({ cvdata, setCVData }) {
-  console.log(cvdata);
+  console.log({ cvdata });
   function updateCV(e) {
     const { name, value } = e.target;
     setCVData((prev) => ({
