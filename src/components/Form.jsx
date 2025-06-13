@@ -1,7 +1,11 @@
 import { useState } from "react";
 import "../styles/form.css";
+// let testcvdata = { Name: "triston" };
+// let educationObject = [{ school: "", start: "", end: "" }];
 
-// let education = {school: name, start: date, end: date}
+// testcvdata = { ...testcvdata, educationObject };
+// console.log({ testcvdata });
+// testcvdata.educationObject.pop();
 
 function formEducation({ cvdata, setCVData }) {
   const { education, value } = [];
@@ -13,12 +17,27 @@ function formEducation({ cvdata, setCVData }) {
   }
   function addEducation() {
     setCVData((prev) => {
-      console.log(prev);
-      let date = "12/12/12";
-      return { ...prev, education: [{ school: name, start: date, end: date }] };
+      let date = "12/32/12";
+      let newobject = {
+        id: crypto.randomUUID(),
+        school: "",
+        start: date,
+        end: date,
+      };
+      let oldObject = [];
+      if (prev.education) {
+        for (let index = 0; index < prev.education.length; index++) {
+          oldObject.push(prev.education[index]);
+        }
+        oldObject.push(newobject);
+      } else {
+        oldObject.push(newobject);
+      }
+      return { ...prev, education: oldObject };
     });
   }
 
+  console.log(cvdata);
   if (!cvdata.education) {
     return (
       <div>
@@ -31,7 +50,7 @@ function formEducation({ cvdata, setCVData }) {
       <div>
         add another <button onClick={addEducation}>+</button>
       </div>
-      {cvdata.education.map((element, index) => console.log())}
+
       <div className="schoolInfo">
         <h2>education</h2> <button onClick={removeEducation}>remove</button>
         <form action="get">
@@ -58,7 +77,6 @@ function formEducation({ cvdata, setCVData }) {
 }
 
 export function Form({ cvdata, setCVData }) {
-  console.log({ cvdata });
   function updateCV(e) {
     const { name, value } = e.target;
     setCVData((prev) => ({
