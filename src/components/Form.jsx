@@ -8,7 +8,38 @@ import "../styles/form.css";
 // testcvdata.educationObject.pop();
 
 function formEducation({ cvdata, setCVData }) {
-  const { education, value } = [];
+  function updateEducation(e) {
+    let text = e.target.value;
+    setCVData((prev) => {
+      let neweducation = [];
+      prev.education.forEach((element) => {
+        neweducation.push(element);
+      });
+      neweducation.forEach((element) => {
+        // probably could just get the target element and return it instead of
+        // remaking new education but doesnt seem like a big deal to me and
+        // this was feels easier to read
+        if (element.id == e.target.dataset.id) {
+          switch (e.target.name) {
+            case "school":
+              element.school = text;
+              break;
+            case "startDate":
+              element.start = text;
+              break;
+            case "endDate":
+              element.end = text;
+              break;
+            default:
+              break;
+          }
+        }
+      });
+      console.log(prev.education);
+      return { ...prev, education: neweducation };
+    });
+  }
+
   function removeEducation() {
     setCVData((prev) => ({
       ...prev,
@@ -17,12 +48,11 @@ function formEducation({ cvdata, setCVData }) {
   }
   function addEducation() {
     setCVData((prev) => {
-      let date = "12/32/12";
       let newobject = {
         id: crypto.randomUUID(),
         school: "",
-        start: date,
-        end: date,
+        start: "",
+        end: "",
       };
       let oldObject = [];
       if (prev.education) {
@@ -37,7 +67,6 @@ function formEducation({ cvdata, setCVData }) {
     });
   }
 
-  console.log(cvdata);
   if (!cvdata.education) {
     return (
       <div>
@@ -50,28 +79,45 @@ function formEducation({ cvdata, setCVData }) {
       <div>
         add another <button onClick={addEducation}>+</button>
       </div>
+      {cvdata.education.map((education) => {
+        return (
+          <div key={education.id} className="schoolInfo">
+            <h2>education</h2> <button onClick={removeEducation}>remove</button>
+            <form action="get">
+              <h2>Contact Info</h2>
+              <div>
+                <label htmlFor="school">School</label>
+                <input
+                  type="text"
+                  id="school"
+                  name="school"
+                  placeholder="Harvard"
+                  data-id={education.id}
+                  onChange={updateEducation}
+                />
 
-      <div className="schoolInfo">
-        <h2>education</h2> <button onClick={removeEducation}>remove</button>
-        <form action="get">
-          <h2>Contact Info</h2>
-          <div>
-            <label htmlFor="school">School</label>
-            <input
-              type="text"
-              id="school"
-              name="school"
-              placeholder="Harvard"
-            />
+                <label htmlFor="startDate">Start</label>
+                <input
+                  type="date"
+                  id="startDate"
+                  name="startDate"
+                  data-id={education.id}
+                  onChange={updateEducation}
+                />
 
-            <label htmlFor="startDate">Start</label>
-            <input type="date" id="startDate" name="startDate" />
-
-            <label htmlFor="endDate">End</label>
-            <input type="date" id="endDate" name="endDate" />
+                <label htmlFor="endDate">End</label>
+                <input
+                  type="date"
+                  id="endDate"
+                  name="endDate"
+                  data-id={education.id}
+                  onChange={updateEducation}
+                />
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
+        );
+      })}
     </>
   );
 }
