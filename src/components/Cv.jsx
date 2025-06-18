@@ -9,6 +9,21 @@ export function CV({ cvdata }) {
   );
 }
 
+function EducationCard({ mydata }) {
+  if (mydata?.education) {
+    return mydata.education.map((entry) => (
+      <div key={entry.id} className="educationCard">
+        <div>{entry.school}</div>
+        <div className="dates">
+          <div>Start Date: {entry.start}</div>
+          <div>End Date: {entry.end}</div>
+        </div>
+      </div>
+    ));
+  }
+  return null;
+}
+
 function CVCard({ data }) {
   if (
     data.address == null ||
@@ -27,6 +42,7 @@ function CVCard({ data }) {
             {data.address} {data.city} {data.state} {data.zip}
           </p>
         </div>
+        <EducationCard mydata={data} />
       </div>
     );
   }
@@ -40,6 +56,8 @@ function CVCard({ data }) {
           {data.address}, {data.city}, {data.state} {data.zip}
         </p>
       </div>
+
+      <EducationCard mydata={data} />
     </div>
   );
 }

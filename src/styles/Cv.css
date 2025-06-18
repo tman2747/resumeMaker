@@ -13,6 +13,14 @@
   top: 25px;
 }
 
+.educationCard {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 25px;
+  margin-top: 10px;
+  border-bottom: black dotted 2px;
+}
+
 .header {
   display: flex;
   justify-content: center;
@@ -25,6 +33,9 @@
 /*for adding print functionality later. not to worried about it now but this is about how id do it*/
 @media print {
   /* All your print styles go here */
+  .CV {
+    width: 4000px;
+  }
   .mainForm {
     display: none;
   }

@@ -35,16 +35,19 @@ function formEducation({ cvdata, setCVData }) {
           }
         }
       });
-      console.log(prev.education);
       return { ...prev, education: neweducation };
     });
   }
 
-  function removeEducation() {
-    setCVData((prev) => ({
-      ...prev,
-      education: null,
-    }));
+  function removeEducation(e) {
+    const idToRemove = e.target.dataset.id;
+    setCVData((prev) => {
+      const newdata = prev.education.filter((entry) => {
+        return entry.id != idToRemove;
+      });
+
+      return { ...prev, education: newdata };
+    });
   }
   function addEducation() {
     setCVData((prev) => {
@@ -82,7 +85,10 @@ function formEducation({ cvdata, setCVData }) {
       {cvdata.education.map((education) => {
         return (
           <div key={education.id} className="schoolInfo">
-            <h2>education</h2> <button onClick={removeEducation}>remove</button>
+            <h2>education</h2>{" "}
+            <button data-id={education.id} onClick={removeEducation}>
+              remove
+            </button>
             <form action="get">
               <h2>Contact Info</h2>
               <div>
