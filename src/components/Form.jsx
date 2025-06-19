@@ -8,6 +8,21 @@ import "../styles/form.css";
 // testcvdata.educationObject.pop();
 
 function formExperence({ cvdata, setCVData }) {
+  function updateExperence(e) {
+    const target = e.target.dataset.id;
+    const field = e.target.name;
+    const value = e.target.value;
+    setCVData((prev) => {
+      console.log(prev);
+      const updatedData = cvdata.experence.map((experence) => {
+        if (experence.id == target) {
+          return { ...experence, [field]: value };
+        } else return experence;
+      });
+      return { ...prev, experence: updatedData };
+    });
+  }
+
   function removeExperence(e) {
     const targetItem = e.target.dataset.id;
     setCVData((prev) => {
@@ -76,6 +91,9 @@ function formExperence({ cvdata, setCVData }) {
                     id="job"
                     name="job"
                     placeholder="Land Farms"
+                    data-id={experence.id}
+                    onChange={updateExperence}
+                    value={experence.job}
                   />
 
                   <label htmlFor="title">title </label>
@@ -84,13 +102,30 @@ function formExperence({ cvdata, setCVData }) {
                     id="title"
                     name="title"
                     placeholder="Driver"
+                    data-id={experence.id}
+                    onChange={updateExperence}
+                    value={experence.title}
                   />
 
                   <label htmlFor="startDate">Start </label>
-                  <input type="date" id="startDate" name="startDate" />
+                  <input
+                    type="date"
+                    id="startDate"
+                    name="start"
+                    data-id={experence.id}
+                    onChange={updateExperence}
+                    value={experence.start}
+                  />
 
                   <label htmlFor="endDate">End </label>
-                  <input type="date" id="endDate" name="endDate" />
+                  <input
+                    type="date"
+                    id="endDate"
+                    name="end"
+                    data-id={experence.id}
+                    onChange={updateExperence}
+                    value={experence.end}
+                  />
                 </div>
               </form>
             </div>
