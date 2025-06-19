@@ -7,6 +7,100 @@ import "../styles/form.css";
 // console.log({ testcvdata });
 // testcvdata.educationObject.pop();
 
+function formExperence({ cvdata, setCVData }) {
+  function removeExperence(e) {
+    const targetItem = e.target.dataset.id;
+    setCVData((prev) => {
+      const updatedXP = prev.experence.filter((data) => {
+        return data.id != targetItem;
+      });
+      return { prev, experence: updatedXP };
+    });
+  }
+  function addExperence(e) {
+    console.log(cvdata);
+    if (!cvdata.experence) {
+      setCVData((prev) => {
+        let myaraay = [
+          {
+            id: crypto.randomUUID(),
+            job: "",
+            title: "",
+            start: "",
+            end: "",
+          },
+        ];
+        return { ...prev, experence: myaraay };
+      });
+    } else {
+      setCVData((prev) => {
+        let myaraay = [
+          {
+            id: crypto.randomUUID(),
+            job: "",
+            title: "",
+            start: "",
+            end: "",
+          },
+        ];
+        return { ...prev, experence: [...prev.experence, ...myaraay] };
+      });
+    }
+  }
+  if (!cvdata.experence || cvdata.experence == null) {
+    return (
+      <div>
+        add Experence <button onClick={addExperence}>+</button>
+      </div>
+    );
+  }
+  return (
+    <>
+      <div>
+        add Experence <button onClick={addExperence}>+</button>
+      </div>
+      {cvdata.experence.map((experence) => {
+        return (
+          <div key={experence.id}>
+            <div className="schoolInfo">
+              <h2>Experence</h2>{" "}
+              <button data-id={experence.id} onClick={removeExperence}>
+                remove
+              </button>
+              <form action="get">
+                <h2>Contact Info</h2>
+                <div>
+                  <label htmlFor="job">Job </label>
+                  <input
+                    type="text"
+                    id="job"
+                    name="job"
+                    placeholder="Land Farms"
+                  />
+
+                  <label htmlFor="title">title </label>
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Driver"
+                  />
+
+                  <label htmlFor="startDate">Start </label>
+                  <input type="date" id="startDate" name="startDate" />
+
+                  <label htmlFor="endDate">End </label>
+                  <input type="date" id="endDate" name="endDate" />
+                </div>
+              </form>
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
 function formEducation({ cvdata, setCVData }) {
   function updateEducation(e) {
     let text = e.target.value;
@@ -73,14 +167,14 @@ function formEducation({ cvdata, setCVData }) {
   if (!cvdata.education) {
     return (
       <div>
-        add education <button onClick={addEducation}>+</button>
+        add Education <button onClick={addEducation}>+</button>
       </div>
     );
   }
   return (
     <>
       <div>
-        add another <button onClick={addEducation}>+</button>
+        add Education <button onClick={addEducation}>+</button>
       </div>
       {cvdata.education.map((education) => {
         return (
@@ -199,6 +293,7 @@ export function Form({ cvdata, setCVData }) {
         </div>
       </form>
       {formEducation({ cvdata, setCVData })}
+      {formExperence({ cvdata, setCVData })}
     </div>
   );
 }
