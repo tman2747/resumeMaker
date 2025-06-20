@@ -29,7 +29,7 @@ function formExperence({ cvdata, setCVData }) {
       const updatedXP = prev.experence.filter((data) => {
         return data.id != targetItem;
       });
-      return { prev, experence: updatedXP };
+      return { ...prev, experence: updatedXP };
     });
   }
   function addExperence(e) {
@@ -96,7 +96,7 @@ function formExperence({ cvdata, setCVData }) {
                     value={experence.job}
                   />
 
-                  <label htmlFor="title">title </label>
+                  <label htmlFor="title"> title </label>
                   <input
                     type="text"
                     id="title"
@@ -107,25 +107,30 @@ function formExperence({ cvdata, setCVData }) {
                     value={experence.title}
                   />
 
-                  <label htmlFor="startDate">Start </label>
-                  <input
-                    type="date"
-                    id="startDate"
-                    name="start"
-                    data-id={experence.id}
-                    onChange={updateExperence}
-                    value={experence.start}
-                  />
-
-                  <label htmlFor="endDate">End </label>
-                  <input
-                    type="date"
-                    id="endDate"
-                    name="end"
-                    data-id={experence.id}
-                    onChange={updateExperence}
-                    value={experence.end}
-                  />
+                  <div className="dates">
+                    <div>
+                      <label htmlFor="startDate">Start </label>
+                      <input
+                        type="date"
+                        id="startDate"
+                        name="start"
+                        data-id={experence.id}
+                        onChange={updateExperence}
+                        value={experence.start}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="endDate">End </label>
+                      <input
+                        type="date"
+                        id="endDate"
+                        name="end"
+                        data-id={experence.id}
+                        onChange={updateExperence}
+                        value={experence.end}
+                      />
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
@@ -221,7 +226,7 @@ function formEducation({ cvdata, setCVData }) {
             <form action="get">
               <h2>Contact Info</h2>
               <div>
-                <label htmlFor="school">School</label>
+                <label htmlFor="school">School </label>
                 <input
                   type="text"
                   id="school"
@@ -231,23 +236,28 @@ function formEducation({ cvdata, setCVData }) {
                   onChange={updateEducation}
                 />
 
-                <label htmlFor="startDate">Start</label>
-                <input
-                  type="date"
-                  id="startDate"
-                  name="startDate"
-                  data-id={education.id}
-                  onChange={updateEducation}
-                />
-
-                <label htmlFor="endDate">End</label>
-                <input
-                  type="date"
-                  id="endDate"
-                  name="endDate"
-                  data-id={education.id}
-                  onChange={updateEducation}
-                />
+                <div className="dates">
+                  <div>
+                    <label htmlFor="startDate">Start </label>
+                    <input
+                      type="date"
+                      id="startDate"
+                      name="startDate"
+                      data-id={education.id}
+                      onChange={updateEducation}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="endDate">End </label>
+                    <input
+                      type="date"
+                      id="endDate"
+                      name="endDate"
+                      data-id={education.id}
+                      onChange={updateEducation}
+                    />
+                  </div>
+                </div>
               </div>
             </form>
           </div>

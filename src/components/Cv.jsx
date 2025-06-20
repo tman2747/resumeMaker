@@ -9,12 +9,33 @@ export function CV({ cvdata }) {
   );
 }
 
+function ExperenceCard({ mydata }) {
+  if (mydata?.experence) {
+    return mydata.experence.map((entry) => (
+      <div key={entry.id} className="educationCard">
+        <div>{entry.job}</div>
+        <div>{entry.title}</div>
+        <div className="datesCV">
+          <div>Start Date: {entry.start}</div>
+          <div>End Date: {entry.end}</div>
+        </div>
+      </div>
+      // id: crypto.randomUUID(),
+      // job: "",
+      // title: "",
+      // start: "",
+      // end: "",
+    ));
+  }
+  return null;
+}
+
 function EducationCard({ mydata }) {
   if (mydata?.education) {
     return mydata.education.map((entry) => (
       <div key={entry.id} className="educationCard">
         <div>{entry.school}</div>
-        <div className="dates">
+        <div className="datesCV">
           <div>Start Date: {entry.start}</div>
           <div>End Date: {entry.end}</div>
         </div>
@@ -25,27 +46,6 @@ function EducationCard({ mydata }) {
 }
 
 function CVCard({ data }) {
-  if (
-    data.address == null ||
-    data.city == null ||
-    data.address == "" ||
-    data.city == ""
-  ) {
-    // im only doing this because i dont want the commas in if its blank. probably a better way of doing this without repeating code.
-    return (
-      <div className="CVCard">
-        <div className="header">
-          <h2>
-            {data.name} {data.lastName}
-          </h2>
-          <p>
-            {data.address} {data.city} {data.state} {data.zip}
-          </p>
-        </div>
-        <EducationCard mydata={data} />
-      </div>
-    );
-  }
   return (
     <div className="CVCard">
       <div className="header">
@@ -53,11 +53,28 @@ function CVCard({ data }) {
           {data.name} {data.lastName}
         </h2>
         <p>
-          {data.address}, {data.city}, {data.state} {data.zip}
+          {data.address}
+          {data.city?.length > 0 && ","} {data.city}
+          {data.state?.length > 0 && ","} {data.state} {data.zip}
         </p>
       </div>
 
-      <EducationCard mydata={data} />
+      {data.education?.length > 0 && (
+        <>
+          <div className="education">
+            <div className="sectionHeader">Education</div>
+            <EducationCard mydata={data} />
+          </div>
+        </>
+      )}
+      {data.experence?.length > 0 && (
+        <>
+          <div className="experence">
+            <div className="sectionHeader">Work Experence</div>
+            <ExperenceCard mydata={data} />
+          </div>
+        </>
+      )}
     </div>
   );
 }
